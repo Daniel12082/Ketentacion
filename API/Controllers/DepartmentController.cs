@@ -11,15 +11,17 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller
-
+//1. CarpetaApiNombre
+//2. NombreEntidad
+//3. Nombre en UnitOfWork, generalmente en plural
 {
-    public class DeparmentController : BaseController
+    public class DepartmentController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly KetentacionBackendContext _context;
 
-        public DeparmentController(IUnitOfWork unitOfWork, IMapper mapper, KetentacionBackendContext context)
+        public DepartmentController(IUnitOfWork unitOfWork, IMapper mapper, KetentacionBackendContext context)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -29,70 +31,76 @@ namespace API.Controller
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<DeparmentDto>>> Get()
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> Get()
         {
-            var result = await _unitOfWork.Deparments.GetAllAsync();
-            return _mapper.Map<List<DeparmentDto>>(result);
+            var result = await _unitOfWork.Departments.GetAllAsync();
+            return _mapper.Map<List<DepartmentDto>>(result);
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<DeparmentDto>> Get(int id)
+        public async Task<ActionResult<DepartmentDto>> Get(int id)
         {
-            var result = await _unitOfWork.Deparments.GetByIdAsync(id);
+            var result = await _unitOfWork.Departments.GetByIdAsync(id);
 
             if (result == null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<DeparmentDto>(result);
+            return _mapper.Map<DepartmentDto>(result);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Deparment>> Post(DeparmentDto DeparmentDto)
+        public async Task<ActionResult<Department>> Post(DepartmentDto DepartmentDto)
         {
-            var result = _mapper.Map<Deparment>(DeparmentDto);
-            this._unitOfWork.Deparments.Add(result);
+            var result = _mapper.Map<Department>(DepartmentDto);
+            this._unitOfWork.Departments.Add(result);
             await _unitOfWork.SaveAsync();
 
             if (result == null)
             {
                 return BadRequest();
             }
-            DeparmentDto.Id = result.Id;
-            return CreatedAtAction(nameof(Post), new { id = DeparmentDto.Id }, DeparmentDto);
+            DepartmentDto.Id = result.Id;
+            return CreatedAtAction(nameof(Post), new { id = DepartmentDto.Id }, DepartmentDto);
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<DeparmentDto>> Put(int id, [FromBody] DeparmentDto DeparmentDto)
+        public async Task<ActionResult<DepartmentDto>> Put(int id, [FromBody] DepartmentDto DepartmentDto)
         {
-            if (DeparmentDto.Id == 0)
+            if (DepartmentDto.Id == 0)
             {
-                DeparmentDto.Id = id;
+                DepartmentDto.Id = id;
             }
 
-            if(DeparmentDto.Id != id)
+            if(DepartmentDto.Id != id)
             {
                 return BadRequest();
             }
 
-            if(DeparmentDto == null)
+            if(DepartmentDto == null)
             {
                 return NotFound();
             }
 
-            var result = _mapper.Map<Deparment>(DeparmentDto);
-            _unitOfWork.Deparments.Update(result);
+             // Por si requiero la fecha actual
+            /*if (DepartmentDto.Fecha == DateTime.MinValue)
+            {
+                DepartmentDto.Fecha = DateTime.Now;
+            }*/
+
+            var result = _mapper.Map<Department>(DepartmentDto);
+            _unitOfWork.Departments.Update(result);
             await _unitOfWork.SaveAsync();
-            return DeparmentDto;
+            return DepartmentDto;
         }
 
         [HttpDelete("{id}")]
@@ -100,14 +108,14 @@ namespace API.Controller
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _unitOfWork.Deparments.GetByIdAsync(id);
+            var result = await _unitOfWork.Departments.GetByIdAsync(id);
 
             if (result == null)
             {
                 return NotFound();
             }
 
-            _unitOfWork.Deparments.Remove(result);
+            _unitOfWork.Departments.Remove(result);
             await _unitOfWork.SaveAsync();
             return NoContent();
         }
