@@ -9,6 +9,7 @@ namespace Domain.Entities
     {
         public int OrderId { get; set; }
         public Order Order { get; set; }
+        public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public DateTime Date { get; set; }
     }

@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace Domain.Interfaces;
 
-public interface IUser : IGenericRepository<User>
+public interface IUser : IGeneric<User>
 {
     Task<User> GetByUsernameAsync(string username);
     Task<User> GetByUserEmailAsync(string email);
