@@ -16,5 +16,6 @@ namespace Domain.Entities
         public ICollection<Client> Clients { get; set; }
         public ICollection<Supplier> Suppliers { get; set; }
         public ICollection<Company> Companies { get; set; }
+        public User User { get; set; }
     }
 }
