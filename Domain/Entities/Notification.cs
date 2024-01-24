@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Notification
+    public class Notification : BaseEntity
     {
         public string Message { get; set; }
         public string Description { get; set; }
