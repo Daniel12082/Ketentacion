@@ -1,4 +1,5 @@
 using Aplication.Repository;
+using Domain.Entities;
 using Domain.Interfaces;
 using Persistence.Data;
 
@@ -14,6 +15,25 @@ namespace APP.UnitOfWork
             _context = context;
         }
 
+        private IAddres _addresses;
+        private ICategoryItem _categoriesitems;
+        private ICategoryProduct _categoriesproducts;
+        private ICity _cities;
+        private IClient _clients;
+        private ICompany _companys;
+        private ICountry _countries;
+        private IDepartment _departments;
+        private IEvent _events;
+        private IItem _items;
+        private INotification _notifications;
+        private IInvoice _invoices;
+        private IOrder _ordes;
+        private IPaymentMethod _paymentsmethods;
+        private IProduct _products;
+        private IProductItem _productsitems;
+        private ISalesInvoice _salesinvoices;
+        private ISupplier _suppliers;
+        private ITypeSupplier _typessuppliers;
 
         private RolRepository _rol; 
         public IRol Rols
