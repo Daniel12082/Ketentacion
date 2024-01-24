@@ -8,11 +8,11 @@ using Persistence.Data;
 
 namespace Aplication.Repository
 {
-    public class SupplierRepository : GenericRepository<Supplier>, ISupplier
+    public class CategoryProductRepository : GenericRepository<CategoryProduct>, ICategoryProduct
     {
         private readonly KetentacionBackendContext _context;
 
-        public SupplierRepository(KetentacionBackendContext context) : base(context)
+        public CategoryProductRepository(KetentacionBackendContext context) : base(context)
         {
             _context = context;
         }
