@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface Invoice
+    public interface IInvoice
     {
         
     }

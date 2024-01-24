@@ -8,6 +8,7 @@ namespace API.Dtos
 {
     public class InvoiceDto
     {
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public Supplier Supplier { get; set; }
         public DateTime Date { get; set; }
