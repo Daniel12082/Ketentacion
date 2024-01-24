@@ -9,11 +9,10 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Data;
 
 namespace API.Controller
-//1. CarpetaApiNombre
-//2. NombreEntidad
-//3. Nombre en UnitOfWork, generalmente en plural
+
 {
     public class CountryController : BaseController
     {

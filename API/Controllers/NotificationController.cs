@@ -9,6 +9,7 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Data;
 
 namespace API.Controller
 
@@ -17,9 +18,9 @@ namespace API.Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly KetentacionBackendqContext _context;
+        private readonly KetentacionBackendContext _context;
 
-        public NotificationController(IUnitOfWork unitOfWork, IMapper mapper, KetentacionBackendqContext context)
+        public NotificationController(IUnitOfWork unitOfWork, IMapper mapper, KetentacionBackendContext context)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
