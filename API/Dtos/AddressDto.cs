@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace API.Dtos
 {
-    public class AdressDto
+    public class AddressDto
     {
         public int Id { get; set; }
         public string Career { get; set; }
