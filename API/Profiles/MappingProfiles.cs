@@ -18,7 +18,7 @@ public class MappingProfiles : Profile
         CreateMap<Client,ClientDto>().ReverseMap(); 
         CreateMap<Company,CompanyDto>().ReverseMap(); 
         CreateMap<Country,CountryDto>().ReverseMap(); 
-        CreateMap<Deparment,DeparmentDto>().ReverseMap(); 
+        CreateMap<Department,DepartmentDto>().ReverseMap(); 
         CreateMap<Event,EventDto>().ReverseMap(); 
         CreateMap<Invoice,InvoiceDto>().ReverseMap(); 
         CreateMap<Item,ItemDto>().ReverseMap(); 
