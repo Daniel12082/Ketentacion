@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class BaseEntity
+    public class CategoryItem : BaseEntity
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<Item> Items { get; set; }
     }
 }
