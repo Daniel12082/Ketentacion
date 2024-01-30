@@ -6,3 +6,5 @@
 ./Persistence/bin
 ./Aplication/obj
 ./Aplication/bin
+./API/appsettings.Development.json
+./API/appsettings.json
