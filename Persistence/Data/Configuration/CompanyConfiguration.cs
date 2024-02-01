@@ -33,18 +33,8 @@ namespace Persistence.Data.Configuration
 
             builder.Property(c => c.AddressId)
                 .HasColumnName("address_id")
-                .IsRequired();
-
-            builder.HasOne(c => c.Address)
-                .WithMany() // Ajusta según tus necesidades
-                .HasForeignKey(c => c.AddressId)
-                .OnDelete(DeleteBehavior.Restrict); // O ajusta según tus necesidades
-
-            // builder.HasOne(c => c.User)
-            //     .WithOne(u => u.Company)
-            //     .HasForeignKey<Company>(c => c.User)
-            //     .OnDelete(DeleteBehavior.Restrict);
-
+                .IsRequired()
+                .HasColumnType("varchar(255)");
         }
     }
 }

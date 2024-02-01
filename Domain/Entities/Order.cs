@@ -12,5 +12,6 @@ namespace Domain.Entities
         public ICollection<Invoice> Invoices { get; set; }
         public ICollection<SalesInvoice> SalesInvoices { get; set; }
         public int PaymentMethodId { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }
