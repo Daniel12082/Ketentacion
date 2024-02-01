@@ -9,7 +9,8 @@ namespace Domain.Entities
     {
         public int OrderId { get; set; }
         public Order Order { get; set; }
-        public string Employee { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
         public DateTime Date { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Domain.Entities
         public string complement { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+        public ICollection<User> Users { get; set; }
         public ICollection<Client> Clients { get; set; }
         public ICollection<Supplier> Suppliers { get; set; }
         public ICollection<Company> Companies { get; set; }
-        public User User { get; set; }
     }
 }

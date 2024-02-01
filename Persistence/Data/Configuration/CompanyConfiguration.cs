@@ -30,21 +30,7 @@ namespace Persistence.Data.Configuration
             builder.Property(c => c.Phone)
                 .HasColumnName("phone")
                 .IsRequired();
-
-            builder.Property(c => c.AddressId)
-                .HasColumnName("address_id")
-                .IsRequired();
-
-            builder.HasOne(c => c.Address)
-                .WithMany() // Ajusta según tus necesidades
-                .HasForeignKey(c => c.AddressId)
-                .OnDelete(DeleteBehavior.Restrict); // O ajusta según tus necesidades
-
-            // builder.HasOne(c => c.User)
-            //     .WithOne(u => u.Company)
-            //     .HasForeignKey<Company>(c => c.User)
-            //     .OnDelete(DeleteBehavior.Restrict);
-
+            builder.HasOne(a => a.Address).WithMany(c => c.Companies).HasForeignKey(a => a.AddressId);
         }
     }
 }
