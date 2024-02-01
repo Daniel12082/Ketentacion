@@ -30,11 +30,7 @@ namespace Persistence.Data.Configuration
             builder.Property(c => c.Phone)
                 .HasColumnName("phone")
                 .IsRequired();
-
-            builder.Property(c => c.AddressId)
-                .HasColumnName("address_id")
-                .IsRequired()
-                .HasColumnType("varchar(255)");
+            builder.HasOne(a => a.Address).WithMany(c => c.Companies).HasForeignKey(a => a.AddressId);
         }
     }
 }
