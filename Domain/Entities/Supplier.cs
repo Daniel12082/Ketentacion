@@ -11,5 +11,6 @@ namespace Domain.Entities
         public int TypeSupplierId { get; set; }
         public TypeSupplier TypeSupplier { get; set; }
         public ICollection<Item> Items { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
     }
 }

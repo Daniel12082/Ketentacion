@@ -17,6 +17,7 @@ namespace Domain.Entities
         public string Password { get; set; }
         public int IdAddress { get; set; }
         public Address Address { get; set; }
+        public ICollection<Event> Events { get; set; }
         public ICollection<Rol> Rols { get; set; } = new HashSet<Rol>();
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
         public int IdCompany { get; set; }

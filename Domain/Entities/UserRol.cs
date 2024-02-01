@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class UserRol
+public class UserRol : BaseEntity
 {
-    public int UsuarioId { get; set; }
-    public User Usuario { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
     public int RolId { get; set; }
     public Rol Rol { get; set; }
 }

@@ -14,5 +14,6 @@ namespace Domain.Entities
         public int AddressId { get; set; }
         public Address Address { get; set; }
         public User User { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }
