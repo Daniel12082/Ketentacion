@@ -90,8 +90,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                });
 
             builder.HasOne(p => p.Company)
-              .WithOne(c => c.User)
-              .HasForeignKey<User>(u => u.IdCompany);
+              .WithMany(c => c.Users)
+              .HasForeignKey(u => u.IdCompany);
 
 
             builder.HasMany(p => p.RefreshTokens)
