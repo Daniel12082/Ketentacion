@@ -4,8 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # Custom ignore files
-./appsettings.Development.json
-./appsettings.json
+appsettings.Development.json
+appsettings.json
 *.appsettingsDevelopment.json
 *.appsettings.json
 
