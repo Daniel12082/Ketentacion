@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,6 @@ namespace Domain.Entities
         public string Description { get; set; }
         public CategoryProduct Category { get; set; }
         public int CategoryId { get; set; }
+        public ICollection<ProductItem> ProductItems { get; set; }
     }
 }

@@ -64,8 +64,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
             builder.HasOne(p => p.Address)
-              .WithOne(a => a.User)
-              .HasForeignKey<User>(u => u.IdAddress);
+              .WithMany(a => a.Users)
+              .HasForeignKey(u => u.IdAddress);
 
             builder
            .HasMany(p => p.Rols)
@@ -78,20 +78,20 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                .HasForeignKey(ut => ut.RolId),
 
                j => j
-               .HasOne(et => et.Usuario)
+               .HasOne(et => et.User)
                .WithMany(et => et.UsersRols)
-               .HasForeignKey(el => el.UsuarioId),
+               .HasForeignKey(el => el.UserId),
 
                j =>
                {
                    j.ToTable("userRol");
-                   j.HasKey(t => new { t.UsuarioId, t.RolId });
+                   j.HasKey(t => new { t.UserId, t.RolId });
 
                });
 
             builder.HasOne(p => p.Company)
-              .WithOne(c => c.User)
-              .HasForeignKey<User>(u => u.IdCompany);
+              .WithMany(c => c.Users)
+              .HasForeignKey(u => u.IdCompany);
 
 
             builder.HasMany(p => p.RefreshTokens)

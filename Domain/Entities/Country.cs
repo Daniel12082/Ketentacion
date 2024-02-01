@@ -8,6 +8,6 @@ namespace Domain.Entities
     public class Country : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<City> Cities { get; set; }
+        public ICollection<Department> departments { get; set; }
     }
 }
