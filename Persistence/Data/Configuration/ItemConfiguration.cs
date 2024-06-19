@@ -22,7 +22,6 @@ namespace Persistence.Data.Configuration
             builder.Property(p => p.StockMax).IsRequired();
             builder.Property(p => p.Stock).IsRequired();
             builder.HasOne(p => p.Category).WithMany(c => c.Items).HasForeignKey(p => p.CategoryId);
-            builder.HasOne(p => p.Category).WithMany(u => u.Items).HasForeignKey(p => p.CategoryId);
         }
     }
 }

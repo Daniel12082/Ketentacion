@@ -11,7 +11,7 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(KetentacionBackendContext))]
-    [Migration("20240201005418_InitialCreate")]
+    [Migration("20240619162537_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
