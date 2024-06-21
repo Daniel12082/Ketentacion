@@ -28,6 +28,7 @@ namespace Domain.Interfaces
         ISalesInvoice SalesInvoices { get;}
         ISupplier Suppliers { get;}
         ITypeSupplier TypeSuppliers { get;}
+        IRol Roles { get; }
         Task<int> SaveAsync();
     }
 }

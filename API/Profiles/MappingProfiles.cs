@@ -30,5 +30,6 @@ public class MappingProfiles : Profile
         CreateMap<SalesInvoice,SalesInvoiceDto>().ReverseMap(); 
         CreateMap<Supplier,SupplierDto>().ReverseMap(); 
         CreateMap<TypeSupplier,TypeSupplierDto>().ReverseMap(); 
+        CreateMap<Rol,RolDto>().ReverseMap();
     }
 }

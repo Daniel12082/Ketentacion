@@ -20,6 +20,7 @@ namespace Persistence.Data.Configuration
 
             builder.Property(c => c.Nit)
                 .HasColumnName("nit")
+                .HasColumnType("bigint")
                 .IsRequired();
 
             builder.Property(c => c.Email)
@@ -29,6 +30,7 @@ namespace Persistence.Data.Configuration
 
             builder.Property(c => c.Phone)
                 .HasColumnName("phone")
+                .HasColumnType("varchar(20)")
                 .IsRequired();
             builder.HasOne(a => a.Address).WithMany(c => c.Companies).HasForeignKey(a => a.AddressId);
         }

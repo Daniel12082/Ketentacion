@@ -29,11 +29,6 @@ namespace Persistence.Data.Configuration
                 .HasColumnName("complement")
                 .HasColumnType("varchar(255)");
             builder.HasOne(c => c.City).WithMany(a => a.Addresses).HasForeignKey(a => a.CityId);
-            // builder.HasOne(a => a.User)
-            //     .WithOne(u => u.Address)
-            //     .HasForeignKey<Address>(a => a.User)
-            //     .OnDelete(DeleteBehavior.Restrict);
-
 
 
         }

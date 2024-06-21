@@ -29,17 +29,16 @@ public class UserService : IUserService
         var user = new User
         {
             Email = registerDto.Email,
-            Username = registerDto.Username,
-            Name = registerDto.Name,
+            FirstName = registerDto.FirstName,
             LastName = registerDto.LastName,
+            Username = registerDto.FirstName + registerDto.LastName,
+            Name = registerDto.FirstName + " " + registerDto.LastName,
             Phone = registerDto.Phone,
             DateEntry = registerDto.DateEntry,
-            IdAddress = registerDto.IdAddress,
-            IdCompany = registerDto.IdCompany
         };
         user.Password = _passwordHasher.HashPassword(user, registerDto.Password); //Encrypt password
         var existingUser = _unitOfWork.Users
-                            .Find(u => u.Username.ToLower() == registerDto.Username.ToLower() || u.Email.ToLower() == registerDto.Email.ToLower())
+                            .Find(u => u.Email.ToLower() == registerDto.Email.ToLower())
                             .FirstOrDefault();
         if (existingUser == null)
         {

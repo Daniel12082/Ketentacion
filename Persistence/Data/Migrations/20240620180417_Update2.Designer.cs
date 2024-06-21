@@ -11,8 +11,8 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(KetentacionBackendContext))]
-    [Migration("20240619162537_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240620180417_Update2")]
+    partial class Update2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,12 +167,13 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("name");
 
-                    b.Property<int>("Nit")
-                        .HasColumnType("int")
+                    b.Property<long>("Nit")
+                        .HasColumnType("bigint")
                         .HasColumnName("nit");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int")
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)")
                         .HasColumnName("phone");
 
                     b.HasKey("Id");
@@ -561,6 +562,9 @@ namespace Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("DateDeparture")
                         .HasMaxLength(12)
                         .HasColumnType("date")
@@ -577,8 +581,11 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("email");
 
-                    b.Property<int>("IdAddress")
-                        .HasColumnType("int");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Firstname");
 
                     b.Property<int>("IdCompany")
                         .HasColumnType("int");
@@ -591,7 +598,7 @@ namespace Persistence.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(60)
                         .HasColumnType("varchar")
                         .HasColumnName("name");
 
@@ -614,7 +621,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAddress");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("IdCompany");
 
@@ -841,9 +848,9 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.Address", "Address")
+                    b.HasOne("Domain.Entities.Address", "IdAddresFkNavigation")
                         .WithMany("Users")
-                        .HasForeignKey("IdAddress")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -853,9 +860,9 @@ namespace Persistence.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Address");
-
                     b.Navigation("Company");
+
+                    b.Navigation("IdAddresFkNavigation");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserRol", b =>

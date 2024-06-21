@@ -30,11 +30,23 @@ namespace APP.UnitOfWork
         private IOrder _orders;
         private IPaymentMethod _paymentmethods;
         private IProduct _products;
+        private IRol _rols;
         private IProductItem _productitems;
         private ISalesInvoice _salesinvoices;
         private ISupplier _suppliers;
         private ITypeSupplier _typesuppliers;
 
+        public IRol Roles
+        {
+            get
+            {
+                if (_rols == null)
+                {
+                    _rols = new RolRepository(_context);
+                }
+                return _rols;
+            }
+        }
         public IAddres Addresses
         {
             get

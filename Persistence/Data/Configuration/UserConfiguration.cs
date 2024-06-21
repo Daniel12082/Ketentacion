@@ -17,14 +17,20 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             builder.Property(p => p.Id)
             .IsRequired();
 
-            builder.Property(p => p.Name)
-            .HasColumnName("name")
+            builder.Property(p => p.FirstName)
+            .HasColumnName("Firstname")
             .HasColumnType("varchar")
             .HasMaxLength(50)
             .IsRequired();
 
             builder.Property(p => p.LastName)
             .HasColumnName("lastName")
+            .HasColumnType("varchar")
+            .HasMaxLength(60)
+            .IsRequired();
+
+            builder.Property(p => p.Name)
+            .HasColumnName("name")
             .HasColumnType("varchar")
             .HasMaxLength(60)
             .IsRequired();
@@ -50,12 +56,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasColumnType("varchar")
             .HasMaxLength(50);
 
-
             builder.Property(p => p.Password)
-           .HasColumnName("password")
-           .HasColumnType("varchar")
-           .HasMaxLength(255)
-           .IsRequired();
+            .HasColumnName("password")
+            .HasColumnType("varchar")
+            .HasMaxLength(255)
+            .IsRequired();
 
             builder.Property(p => p.Email)
             .HasColumnName("email")
@@ -63,43 +68,38 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(100)
             .IsRequired();
 
-            builder.HasOne(p => p.Address)
-              .WithMany(a => a.Users)
-              .HasForeignKey(u => u.IdAddress);
+            builder.HasOne(u => u.IdAddresFkNavigation)
+                .WithMany(a => a.Users)
+                .HasForeignKey(u => u.AddressId);
 
             builder
-           .HasMany(p => p.Rols)
-           .WithMany(r => r.Users)
-           .UsingEntity<UserRol>(
+                .HasMany(p => p.Rols)
+                .WithMany(r => r.Users)
+                .UsingEntity<UserRol>(
 
-               j => j
-               .HasOne(pt => pt.Rol)
-               .WithMany(t => t.UsersRols)
-               .HasForeignKey(ut => ut.RolId),
+                j => j
+                .HasOne(pt => pt.Rol)
+                .WithMany(t => t.UsersRols)
+                .HasForeignKey(ut => ut.RolId),
 
-               j => j
-               .HasOne(et => et.User)
-               .WithMany(et => et.UsersRols)
-               .HasForeignKey(el => el.UserId),
+                j => j
+                .HasOne(et => et.User)
+                .WithMany(et => et.UsersRols)
+                .HasForeignKey(el => el.UserId),
 
-               j =>
-               {
-                   j.ToTable("userRol");
-                   j.HasKey(t => new { t.UserId, t.RolId });
-
-               });
+                j =>
+                {
+                    j.ToTable("userRol");
+                    j.HasKey(t => new { t.UserId, t.RolId });
+                });
 
             builder.HasOne(p => p.Company)
-              .WithMany(c => c.Users)
-              .HasForeignKey(u => u.IdCompany);
-
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.IdCompany);
 
             builder.HasMany(p => p.RefreshTokens)
-            .WithOne(p => p.User)
-            .HasForeignKey(p => p.UserId);
-
-
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId);
         }
-
     }
 }
