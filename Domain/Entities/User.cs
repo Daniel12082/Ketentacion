@@ -16,8 +16,8 @@ namespace Domain.Entities
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int AddressId { get; set; } // Esta es la clave foránea
-        public Address IdAddresFkNavigation { get; set; }
+        public int IdAddressFk { get; set; }
+        public Address Address { get; set; }
         public ICollection<Event> Events { get; set; }
         public ICollection<Rol> Rols { get; set; } = new HashSet<Rol>();
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();

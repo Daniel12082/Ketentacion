@@ -11,8 +11,8 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(KetentacionBackendContext))]
-    [Migration("20240620180417_Update2")]
-    partial class Update2
+    [Migration("20240622090131_Initialcreate")]
+    partial class Initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,8 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("complement");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("idAddress");
 
                     b.HasIndex("CityId");
 
@@ -562,9 +563,6 @@ namespace Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<DateOnly>("DateDeparture")
                         .HasMaxLength(12)
                         .HasColumnType("date")
@@ -586,6 +584,9 @@ namespace Persistence.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("Firstname");
+
+                    b.Property<int>("IdAddressFk")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdCompany")
                         .HasColumnType("int");
@@ -621,7 +622,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("IdAddressFk");
 
                     b.HasIndex("IdCompany");
 
@@ -655,7 +656,8 @@ namespace Persistence.Data.Migrations
                         .WithMany("Addresses")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_address_city");
 
                     b.Navigation("City");
                 });
@@ -848,21 +850,22 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.Address", "IdAddresFkNavigation")
+                    b.HasOne("Domain.Entities.Address", "Address")
                         .WithMany("Users")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdAddressFk")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_address");
 
                     b.HasOne("Domain.Entities.Company", "Company")
                         .WithMany("Users")
                         .HasForeignKey("IdCompany")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Company");
+                    b.Navigation("Address");
 
-                    b.Navigation("IdAddresFkNavigation");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserRol", b =>

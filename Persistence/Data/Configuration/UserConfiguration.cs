@@ -13,6 +13,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         {
             builder.ToTable("user");
+            builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id)
             .IsRequired();
@@ -68,10 +69,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(100)
             .IsRequired();
 
-            builder.HasOne(u => u.IdAddresFkNavigation)
-                .WithMany(a => a.Users)
-                .HasForeignKey(u => u.AddressId);
-
+            builder.HasOne(u => u.Address)
+            .WithMany(a => a.Users)
+            .HasForeignKey(u => u.IdAddressFk)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("fk_user_address");
+            
             builder
                 .HasMany(p => p.Rols)
                 .WithMany(r => r.Users)
@@ -95,7 +98,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
             builder.HasOne(p => p.Company)
                 .WithMany(c => c.Users)
-                .HasForeignKey(u => u.IdCompany);
+                .HasForeignKey(u => u.IdCompany)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(p => p.RefreshTokens)
                 .WithOne(p => p.User)

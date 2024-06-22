@@ -34,7 +34,7 @@ public class UserService : IUserService
             Username = registerDto.FirstName + registerDto.LastName,
             Name = registerDto.FirstName + " " + registerDto.LastName,
             Phone = registerDto.Phone,
-            DateEntry = registerDto.DateEntry,
+            DateEntry = registerDto.DateEntry
         };
         user.Password = _passwordHasher.HashPassword(user, registerDto.Password); //Encrypt password
         var existingUser = _unitOfWork.Users

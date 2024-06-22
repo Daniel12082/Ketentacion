@@ -14,6 +14,6 @@ namespace API.Dtos
         public string Number { get; set; }
         public string complement { get; set; }
         public int CityId { get; set; }
-        public City City { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

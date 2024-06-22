@@ -9,9 +9,7 @@ namespace Persistence.Data.Configuration
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.ToTable("address");
-
-            builder.Property(a => a.Id)
-                .IsRequired();
+            builder.HasKey(a => a.Id).HasName("idAddress");
 
             builder.Property(a => a.Career)
                 .HasColumnName("career")
@@ -28,7 +26,7 @@ namespace Persistence.Data.Configuration
             builder.Property(a => a.complement)
                 .HasColumnName("complement")
                 .HasColumnType("varchar(255)");
-            builder.HasOne(c => c.City).WithMany(a => a.Addresses).HasForeignKey(a => a.CityId);
+            builder.HasOne(c => c.City).WithMany(a => a.Addresses).HasForeignKey(a => a.CityId).HasConstraintName("fk_address_city");
 
 
         }

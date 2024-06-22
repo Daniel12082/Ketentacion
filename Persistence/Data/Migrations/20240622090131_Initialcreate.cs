@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -256,9 +256,9 @@ namespace Persistence.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_address", x => x.Id);
+                    table.PrimaryKey("idAddress", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_address_city_CityId",
+                        name: "fk_address_city",
                         column: x => x.CityId,
                         principalTable: "city",
                         principalColumn: "Id",
@@ -403,24 +403,24 @@ namespace Persistence.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IdAddress = table.Column<int>(type: "int", nullable: false),
+                    IdAddressFk = table.Column<int>(type: "int", nullable: false),
                     IdCompany = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_user", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_user_address_IdAddress",
-                        column: x => x.IdAddress,
-                        principalTable: "address",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_user_company_IdCompany",
                         column: x => x.IdCompany,
                         principalTable: "company",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_user_address",
+                        column: x => x.IdAddressFk,
+                        principalTable: "address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -703,9 +703,9 @@ namespace Persistence.Data.Migrations
                 column: "TypeSupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_IdAddress",
+                name: "IX_user_IdAddressFk",
                 table: "user",
-                column: "IdAddress");
+                column: "IdAddressFk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_user_IdCompany",
